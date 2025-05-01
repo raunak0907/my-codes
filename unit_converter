@@ -1,0 +1,66 @@
+import streamlit as st
+
+st.title("🌏 Unit Converter")
+st.markdown("### Converts length, weight, and time instantly")
+
+category = st.selectbox("Choose a category", ["choose","length", "weight", "time"])
+
+def unit_convert(category, value, unit):
+    if category == "length":
+        if unit == "kilometers to miles":
+            return value * 0.621371
+        elif unit == "miles to kilometers":
+            return value / 0.621371
+        elif unit == "meters to kilometers":
+            return value / 1000
+        elif unit == "kilometers to meters":
+            return value * 1000
+        elif unit == "centimeters to meters":
+            return value / 100
+        elif unit == "meters to centimeters":
+            return value * 100
+        elif unit == "centimeters to kilometers":
+            return value / 100000
+        elif unit == "kilometers to centimeters":
+            return value * 100000
+    elif category == "weight":
+        if unit == "kilograms to pounds":
+            return value * 2.20462
+        elif unit == "pounds to kilograms":
+            return value / 2.20462
+    elif category == "time":
+        if unit == "seconds to minutes":
+            return value / 60
+        elif unit == "minutes to seconds":
+            return value * 60
+        elif unit == "minutes to hours":
+            return value / 60
+        elif unit == "hours to minutes":
+            return value * 60
+        elif unit == "hours to days":
+            return value / 24
+        elif unit == "days to hours":
+            return value * 24
+if category == "Choose":
+    st.warning("Please select a category to proceed.")
+else:
+
+
+    if category == "length":
+        unit = st.selectbox("Select conversion", 
+                            ["kilometers to miles", "miles to kilometers", 
+                            "meters to kilometers", "kilometers to meters", 
+                            "centimeters to meters", "meters to centimeters", 
+                            "centimeters to kilometers", "kilometers to centimeters"])
+    elif category == "weight":
+        unit = st.selectbox("Select conversion", ["kilograms to pounds", "pounds to kilograms"])
+    elif category == "time":
+        unit = st.selectbox("Select conversion", 
+                            ["seconds to minutes", "minutes to seconds", "minutes to hours", 
+                            "hours to minutes", "hours to days", "days to hours"])
+
+    value = st.number_input("Enter the value to convert", min_value=0.0, step=0.1)
+
+    if st.button("Convert"):
+        result = unit_convert(category, value, unit)
+        st.success(f"The result is {result:.2f}")
